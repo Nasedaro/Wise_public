@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 리스트 페이지</title>
+    <link href="boardlist.css" rel="stylesheet"?
+</head>
+
+<style>
+
+    .layout {
+        width : 500px;
+        margin : 0 auto;
+        margin-top : 40px;
+    }
+
+
+
+</style>
+
+<body>
+    <div><span id="te1">위시</span><span id="te2">with senior</span></div>
+    <h2>후기 작성</h2>
+    <div class="layout">
+        <table>
+            <thead>
+                <tr>
+                    <th>번호</th>
+                    <th>회사</th>
+                    <th>내용</th>
+                    <th>평점</th>
+                    <th>작성자</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="board : ${list}" >
+                    <td th:text="${board.id}">1</td>
+                    <td ><a th:text="${board.title}" th:href="@{/board/view(id=${board.id})}"></a></td>
+                    <td ><a th:text="${board.content}" ></a></td>
+                    <td ><a th:text="${board.rating}" ></a></td>
+                    <td ><a th:text="${board.writer}" ></a></td>
+                </tr>
+            </tbody>
+        </table>>
+    </div>
+    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}" th:text="${page}"></a>
+        <strong th:if="${page == nowPage}" th:text="${page}" style="color : red"></strong>
+    </th:block>
+</body>
+</html>
